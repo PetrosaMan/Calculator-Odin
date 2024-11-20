@@ -3,13 +3,15 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Calculator-The Odin Project</title>    
+    <title>Calculator-The Odin Project</title> 
+    <!--prevent favicon error in console: -->
+    <link rel="shortcut icon" href="#">    
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
     <main id="calculator">      
       <div id="container">
-        <input id="display" type="text" disabled value = 0  >        
+        <div id="display"  class="display" type="text"  value = 0>0</div>        
         <button class="clear" value="clear">AC</button>
         <button class="sign" value="sign">+/-</button>
         <button class="percent" value="percent">%</button>
