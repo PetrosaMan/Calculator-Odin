@@ -50,7 +50,7 @@ button {
     font-size:xx-large;
 }
 
-.clear, .sign, .percent, .decimal, .back {
+.allClear, .sign, .percent, .decimal, .back {
     background-color: bisque;
 }
 
