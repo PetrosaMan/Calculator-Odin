@@ -45,12 +45,19 @@ function Calculator() {
 
     this.percentage = function(a) {
         return parseFloat(a) / 100;
-    }
+    }    
     
     this.updateDisplay = function() {        
         this.display = this.currentOperand;
         document.querySelector("#display").textContent = this.display;
         return;       
+    }
+
+    this.backSpace = function() {        
+        let temp = this.display;        
+        this.display = temp.substring(0, temp.length-1);        
+        this.currentOperand = this.display;
+        this.updateDisplay(); 
     }
 
     this.appendNumber = function(value) {  
@@ -79,7 +86,8 @@ function Calculator() {
     let container = document.querySelector("#container");    
     
     container.addEventListener("click", (e) => {
-        let target =e.target;
+        let target = e.target;
+        console.log("e.target: ", target);
         switch(target.value){
             case "allClear":
                 this.allClear();                
@@ -119,7 +127,10 @@ function Calculator() {
                 break; 
             case "sign":
                 this.changeSign();
-                break;                  
+                break;
+            case "backspace":
+                this.backSpace();
+                break;                      
         }
     });
    
