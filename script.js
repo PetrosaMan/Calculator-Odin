@@ -16,8 +16,13 @@ function Calculator() {
         document.querySelector("#display").textContent = 0;
     }
 
-    this.add = function(a, b) {        
-        return parseFloat(a) + parseFloat(b);
+    this.add = function() { 
+        let result =  parseFloat(this.currentOperand) +
+        parseFloat(this.previousOperand);
+        console.log(result);
+        // logic wrong here display not updating
+        this.display = result;
+        this.updateDisplay();
     }
 
     this.subtract = function(a, b) {
@@ -57,6 +62,9 @@ function Calculator() {
         let temp = this.display;        
         this.display = temp.substring(0, temp.length-1);        
         this.currentOperand = this.display;
+        if(this.currentOperand === "") {
+            this.currentOperand += "0";
+        }        
         this.updateDisplay(); 
     }
 
@@ -81,7 +89,22 @@ function Calculator() {
             this.currentOperand += ".";  // Appends decimal point
         }
         this.updateDisplay();
-    }   
+    }  
+    
+    this.operate = function() {
+        // This function takes two operands and one operator,
+        // and then calls one of the following add, subtract,
+        // multiply or divide functions
+        if (this.currentOperand !== "" && this.previousOperand === "") {
+            this.previousOperand += this.currentOperand;
+            this.currentOperand = "";            
+            this.display = this.currentOperand;
+            this.updateDisplay();
+            return;
+        } 
+        this.add();        
+        return;
+    }
     
     let container = document.querySelector("#container");    
     
@@ -130,7 +153,11 @@ function Calculator() {
                 break;
             case "backspace":
                 this.backSpace();
-                break;                      
+                break; 
+            case "+":
+                this.operator = "+";
+                this.operate();
+                break;                     
         }
     });
    
