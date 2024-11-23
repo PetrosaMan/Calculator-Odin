@@ -19,9 +19,8 @@ function Calculator() {
     this.add = function() { 
         let result =  parseFloat(this.currentOperand) +
         parseFloat(this.previousOperand);
-        console.log(result);
-        // logic wrong here display not updating
-        this.display = result;
+        console.log(result);        
+        this.currentOperand = result;        
         this.updateDisplay();
     }
 
@@ -96,15 +95,16 @@ function Calculator() {
         // and then calls one of the following add, subtract,
         // multiply or divide functions
         if (this.currentOperand !== "" && this.previousOperand === "") {
-            this.previousOperand += this.currentOperand;
-            this.currentOperand = "";            
+            this.previousOperand = this.currentOperand;  // changed += to =
+            //this.currentOperand = "";            
             this.display = this.currentOperand;
             this.updateDisplay();
+            this.currentOperand = "";  //// moved to here
             return;
-        } 
-        this.add();        
-        return;
-    }
+        }          
+            this.add();                 
+            return;
+    }     
     
     let container = document.querySelector("#container");    
     
@@ -164,13 +164,3 @@ function Calculator() {
 }
 // Create an instance of the calculator
 let calc = new Calculator();
-
-//console.log(calc.add(2, 4));
-//console.log(calc.subtract(2, 4));
-//console.log(calc.multiply(2, 4));
-//console.log(calc.divide(2, 4));
-//console.log(calc.changeSign(7));
-//console.log(calc.changeSign(-8));
-//console.log(calc.percentage(20));
-
-
