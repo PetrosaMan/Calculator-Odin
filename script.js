@@ -29,7 +29,7 @@ const multiply = (op1, op2) => {
     displayCurr.textContent = parseFloat(op2) * parseFloat(op1);
 }
 
-const divide = (op1, op2, operator) => {
+const divide = (op1, op2) => {
     console.log(parseFloat(op2) / parseFloat(op1));
     displayCurr.textContent =  parseFloat(op2) / parseFloat(op1);   
 }
@@ -79,12 +79,46 @@ const operate = (op1, op2, operator) => {
     }
 }
 
+const allClear = () => {
+    console.log("All clear function");
+    op1 = "0";
+    op2 = "0";
+    operator = "";
+    result = 0;
+    isNewOperation = true;
+    displayCurr.textContent = "0";
+    displayPrev.textContent = "0";
+}
+
+const changeSign = () => {    
+    console.log("change sign function");
+    op1 = parseFloat(displayCurr.textContent);
+    op1 = -op1;
+    displayCurr.textContent = op1;
+    updateDisplay; // Is this necessary
+}
+
+const backSpace = () => {
+    let temp = displayCurr.textContent;
+    op1 = temp.substring(0, temp.length - 1)
+    displayCurr.textContent = op1;
+    if(displayCurr.textContent === "") {
+        displayCurr.textContent += "0";
+    }
+    updateDisplay(); // Is this necessary
+}
+
+const percentage = () => {
+    console.log("percentage function");
+    displayCurr.textContent = parseFloat(op1) / 100;
+}
+
 container.addEventListener("click", (e) => {
     console.log("1) container.addEventListener");
     let target = e.target;    
     switch(target.value){
         case "allClear":
-            //allClear();                
+            allClear();                
             break;
         case  "9":             
         case  "8":
@@ -102,10 +136,10 @@ container.addEventListener("click", (e) => {
             appendDecimal("."); 
             break; 
         case "sign":
-            //changeSign();
+            changeSign();
             break;
         case "backspace":
-            //backSpace();
+            backSpace();
             break; 
         case "+": 
             console.log("case +");
@@ -151,7 +185,11 @@ container.addEventListener("click", (e) => {
             op1 = "0"; 
             isNewOperation = false;                   
             break;
-
+        case "%":
+            console.log("case %");
+            op1 = displayCurr.textContent;
+            percentage();                      
+            break; 
         case "=":
             console.log("case = ");
             operate(op1, op2, operator);
