@@ -33,6 +33,7 @@ const divide = (op1, op2) => {
 }
 
 const updateDisplay = () => {
+    // Fix decimal places at say two:
     displayCurr.textContent = op1.toString();
 }
 
