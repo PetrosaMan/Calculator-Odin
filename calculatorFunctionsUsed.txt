@@ -27,4 +27,19 @@ Functions called from eventListener():
 
 container.addEventListener() => {}
 
+```
+  // Coding:
+  // Generally in javaScript keep numbers as numbers and 
+  // only change to strings when necessary.
+  // Example: 
+
+  op1 = 45.23;
+  // Check if number already contains a decimal point 
+  if(!op1.toString().includes(".")) {
+    // add decimal point if not present:
+    op1 = op1.toString() + ".";
+  } 
+
+```  
+
     
