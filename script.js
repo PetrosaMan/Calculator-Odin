@@ -41,17 +41,13 @@ const appendNumber = (value) => {
         op1 = parseFloat(value); //Replace leading zero
     } else {
         op1 = parseFloat(op1.toString() + value); // Append value
-    }    
-    // Remove leading zeros for integers but keep "0." for decimals
-    if(!op1.toString().includes(".")) {
-        op1 = op1.toString().replace(/^0+(?=\d)/, "");
-    }            
+    }                     
     updateDisplay();        
 } 
 
 const appendDecimal = () => {
     if(!op1.toString().includes(".")) {
-        op1 = parseFloat(op1 + " .0");  // add decimal point if not present  
+        op1 = op1.toString() + ".";  // add decimal point if not present
     }
     updateDisplay();
 } 
@@ -85,7 +81,6 @@ const allClear = () => {
 }
 
 const changeSign = () => {    
-    console.log("change sign function");
     op1 = parseFloat(displayCurr.textContent);
     op1 = -op1;
     displayCurr.textContent = op1;
@@ -94,7 +89,7 @@ const changeSign = () => {
 
 const backSpace = () => {
     let temp = displayCurr.textContent;
-    op1 = temp.substring(0, temp.length - 1) || "0"; // ensure op1 is never empty
+    op1 = temp.slice(0, -1) || "0"; // ensure op1 is never empty
     displayCurr.textContent = op1;    
     updateDisplay(); 
 }
@@ -111,13 +106,12 @@ const equals = () => {
     op1 = 0;    
 }
 
-const setOperator = (newOperator) => {
-    console.log("percentage function");
+const setOperator = (newOperator) => {    
     if(!isNewOperation) {
         operate(op1, op2, operator);
     }
     operator = newOperator;
-    op2 = displayCurr.textContent;
+    op2 = parseFloat(displayCurr.textContent);
     displayPrev.textContent = `${op2} ${operator}`;
     op1 = 0;
     isNewOperation = false;
