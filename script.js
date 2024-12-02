@@ -81,7 +81,7 @@ const allClear = () => {
     result = 0;
     isNewOperation = true;
     displayCurr.textContent = "0";
-    displayPrev.textContent = "0";
+    displayPrev.textContent = "0";    
 }
 
 const changeSign = () => {    
@@ -158,14 +158,14 @@ container.addEventListener("click", (e) => {
         case "%":            
             percentage();                      
             break; 
-        case "=":            
+        case "=": 
             equals();           
             break;
     }
 });
 
 // Add event listener for keypress
-document.addEventListener("keypress", (e) => {
+document.addEventListener("keydown", (e) => {
     const key = e.key; // Check if key is a number
     if (!isNaN(key)) {
         appendNumber(key);
@@ -186,4 +186,11 @@ document.addEventListener("keypress", (e) => {
         percentage();
     }
 
+    if(key === "Backspace") {
+        backSpace();
+    }
+
+    if(key === "+" || key === "-" || key === "*" || key === "/") {
+        setOperator(key);
+    }    
 });
