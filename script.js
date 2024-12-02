@@ -13,7 +13,8 @@ let displayCurr = document.querySelector("#displayCurr");
 let container = document.querySelector("#container");
 let currentOperation = document.querySelector(".operator");
 
-const add = (op1, op2) => {     
+const add = (op1, op2) => {  
+    console.log("add function called");   
     let sum = op2 + op1;   
     displayCurr.textContent = sum.toFixed(2);  
     op1 = sum;
@@ -21,7 +22,7 @@ const add = (op1, op2) => {
 }    
 
 const subtract = (op1, op2) => {
-    displayCurr.textContent = op2 - op1;
+    displayCurr.textContent = (op2 - op1).toFixed(2);
 }
 
 const multiply = (op1, op2) => {  
@@ -37,10 +38,12 @@ const divide = (op1, op2) => {
 }
 
 const updateDisplay = () => {
+    console.log("update display function called");
     displayCurr.textContent = op1.toString();
 }
 
-const appendNumber = (value) => {  
+const appendNumber = (value) => { 
+    console.log("append number function called"); 
     if(op1 === 0 && value !== ".") {
         op1 = parseFloat(value); //Replace leading zero
     } else {
@@ -50,6 +53,7 @@ const appendNumber = (value) => {
 } 
 
 const appendDecimal = () => {
+    console.log("append decimal function called");
     if(!op1.toString().includes(".")) {
         op1 = op1.toString() + ".";  // add decimal point if not present
     }
@@ -57,6 +61,7 @@ const appendDecimal = () => {
 } 
 
 const operate = (op1, op2, operator) => {
+    console.log("operate function called");
     switch (operator) {
         case ("+"):
             add(op1, op2);            
@@ -73,8 +78,8 @@ const operate = (op1, op2, operator) => {
     }
 }
 
-const allClear = () => {
-    console.log("All clear function");
+const allClear = () => { 
+    console.log("all clear function called");   
     op1 = 0;
     op2 = 0;
     operator = "";
@@ -84,7 +89,8 @@ const allClear = () => {
     displayPrev.textContent = "0";    
 }
 
-const changeSign = () => {    
+const changeSign = () => { 
+    console.log("change sign function called");   
     op1 = parseFloat(displayCurr.textContent);
     op1 = -op1;
     displayCurr.textContent = op1;
@@ -92,6 +98,7 @@ const changeSign = () => {
 }
 
 const backSpace = () => {
+    console.log("back function called");
     let temp = displayCurr.textContent;
     op1 = temp.slice(0, -1) || "0"; // ensure op1 is never empty
     displayCurr.textContent = op1;    
@@ -99,11 +106,13 @@ const backSpace = () => {
 }
 
 const percentage = () => {
+    console.log("percentage function called");
     op1 /= 100;
     updateDisplay();
 }
 
-const equals = () => {    
+const equals = () => {   
+    console.log("equals function called"); 
     operate(op1, op2, operator);
     op2 = parseFloat(displayCurr.textContent); 
     displayPrev.textContent = op2;
@@ -111,6 +120,7 @@ const equals = () => {
 }
 
 const setOperator = (newOperator) => {    
+    console.log("set operator function called");
     if(!isNewOperation) {
         operate(op1, op2, operator);
     }
@@ -121,8 +131,8 @@ const setOperator = (newOperator) => {
     isNewOperation = false;
 }
 
-container.addEventListener("click", (e) => {
-    console.log("1) container.addEventListener");
+container.addEventListener("click", (e) => { 
+    console.log("add event listener function called");   
     let target = e.target;    
     switch(target.value){
         case "allClear":
@@ -164,7 +174,7 @@ container.addEventListener("click", (e) => {
     }
 });
 
-// Add event listener for keypress
+// Add event listener for keydown
 document.addEventListener("keydown", (e) => {
     const key = e.key; // Check if key is a number
     if (!isNaN(key)) {
