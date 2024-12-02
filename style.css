@@ -33,7 +33,7 @@ body {
 }
 
 #displayCurr {
-    height: 70px;
+    min-height: 70px;
     width: 402px;    
     font-size: 60px;
     color: black;    
@@ -45,7 +45,8 @@ body {
     border-bottom-left-radius: 8px;
     border-bottom-right-radius: 8px;
     border-bottom: 2px solid brown;
-    /*word-wrap:break-word;*/       
+    word-wrap:break-word;   
+        
 }
 
 #displayPrev {
@@ -67,6 +68,11 @@ button {
     border-radius: 8px;
     font-family: Arial, Helvetica, sans-serif;
     font-size:xx-large;
+}
+
+button:hover {
+    background-color: rgb(161, 148, 173);
+    cursor: pointer;
 }
 
 .allClear, .sign, .percent, .decimal, .backspace {

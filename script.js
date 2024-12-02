@@ -13,11 +13,11 @@ let displayCurr = document.querySelector("#displayCurr");
 let container = document.querySelector("#container");
 let currentOperation = document.querySelector(".operator");
 
-const add = (op1, op2) => {
-    console.log(typeof op1, typeof op2)
-    let sum = parseFloat(op2) + parseFloat(op1);    
-    displayCurr.textContent = sum;
+const add = (op1, op2) => {     
+    let sum = op2 + op1;   
+    displayCurr.textContent = sum.toFixed(2);  
     op1 = sum;
+    
 }    
 
 const subtract = (op1, op2) => {
@@ -25,15 +25,18 @@ const subtract = (op1, op2) => {
 }
 
 const multiply = (op1, op2) => {  
-    displayCurr.textContent = op2 * op1;
+    displayCurr.textContent = (op2 * op1).toFixed(2);
 }
 
 const divide = (op1, op2) => {
-  displayCurr.textContent =  op2 / op1;   
+  if (op1 === 0) {
+    displayCurr.textContent = "Really ?";
+  }  else {
+  displayCurr.textContent =  (op2 / op1).toFixed(2); 
+  }  
 }
 
 const updateDisplay = () => {
-    // Fix decimal places at say two:
     displayCurr.textContent = op1.toString();
 }
 
@@ -159,4 +162,28 @@ container.addEventListener("click", (e) => {
             equals();           
             break;
     }
+});
+
+// Add event listener for keypress
+document.addEventListener("keypress", (e) => {
+    const key = e.key; // Check if key is a number
+    if (!isNaN(key)) {
+        appendNumber(key);
+    }
+    if (key === ".") {
+        appendDecimal();
+    }
+
+    if(key === 'C' || key === 'c') {
+        allClear();
+    }
+
+    if(key === "=") {
+        equals();
+    }
+
+    if(key === "%") {
+        percentage();
+    }
+
 });
